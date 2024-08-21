@@ -29,6 +29,10 @@ func (ps *ParkingSlot) ID() int {
 	return ps.id
 }
 
+func (ps *ParkingSlot) Vehicle() vehicle.IVehicle {
+	return ps.vehicle
+}
+
 func (ps *ParkingSlot) IsOccupied() bool {
 	return ps.vehicle != nil
 }
@@ -60,8 +64,8 @@ func (ps *ParkingSlot) Vacate() {
 
 func (ps *ParkingSlot) Status() string {
 	if ps.IsOccupied() {
-		return fmt.Sprintf("Slot %d: Vehicle %s is parked", ps.id, ps.vehicle.RegistrationNo())
+		return fmt.Sprintf("Slot %d: Vehicle %s is parked\n", ps.id, ps.vehicle.RegistrationNo())
 	}
 
-	return fmt.Sprintf("Slot %d: Empty", ps.id)
+	return fmt.Sprintf("Slot %d: Empty\n", ps.id)
 }
