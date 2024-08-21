@@ -70,7 +70,8 @@ func (d *CommandLineDriver) ParkCallback(args []string) (string, error) {
 	registrationNo := args[2]
 	color := args[3]
 
-	return d.parkingLot.ParkVehicle(types.VehicleType(vehicleTypeStr), registrationNo, commonTypes.Color(color))
+	output, err := d.parkingLot.ParkVehicle(types.VehicleType(vehicleTypeStr), registrationNo, commonTypes.Color(color))
+	return output + "\n", err
 }
 
 func (d *CommandLineDriver) VacateBySlotIDCallback(args []string) (string, error) {
