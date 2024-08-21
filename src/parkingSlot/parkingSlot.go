@@ -34,6 +34,10 @@ func (ps *ParkingSlot) Park(vehicle vehicle.IVehicle) error {
 		return errors.InvalidParkOccupied
 	}
 
+	if !ps.slotType.CanAccommodate(vehicle.Type()) {
+		return errors.InvalidParkCantAccomodate
+	}
+
 	ps.vehicle = vehicle
 	return nil
 }
