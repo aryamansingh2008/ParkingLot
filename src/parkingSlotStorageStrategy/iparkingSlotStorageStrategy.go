@@ -1,4 +1,4 @@
-package parkingslotstoragestrategy
+package parkingSlotStorageStrategy
 
 import parkingslot "github.com/aryamansingh2008/ParkingLot/src/parkingSlot"
 

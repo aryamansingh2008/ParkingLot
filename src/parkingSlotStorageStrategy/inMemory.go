@@ -1,9 +1,9 @@
-package parkingslotstoragestrategy
+package parkingSlotStorageStrategy
 
 import (
-	"github.com/aryamansingh2008/ParkingLot/src/common/parkingSlotStorageStrategy/errors"
 	parkingslot "github.com/aryamansingh2008/ParkingLot/src/parkingSlot"
 	parkingslottype "github.com/aryamansingh2008/ParkingLot/src/parkingSlot/parkingSlotType"
+	"github.com/aryamansingh2008/ParkingLot/src/parkingSlotStorageStrategy/errors"
 )
 
 type InMemoryStorage struct {
