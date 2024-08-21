@@ -3,12 +3,11 @@ package parkingLot
 import (
 	"strconv"
 
-	commonTypes "github.com/aryamansingh2008/ParkingLot/src/common/types"
 	"github.com/aryamansingh2008/ParkingLot/src/parkingLot/errors"
 	"github.com/aryamansingh2008/ParkingLot/src/slotAllocationStrategy"
 	"github.com/aryamansingh2008/ParkingLot/src/slotStorageStrategy"
 	"github.com/aryamansingh2008/ParkingLot/src/vehicle/factory"
-	vehicleTypes "github.com/aryamansingh2008/ParkingLot/src/vehicle/types"
+	"github.com/aryamansingh2008/ParkingLot/src/vehicle/types"
 )
 
 type ParkingLot struct {
@@ -28,8 +27,8 @@ func NewParkingLot(storageStrategy slotStorageStrategy.ISlotStorageStrategy,
 	}, nil
 }
 
-func (pl *ParkingLot) ParkVehicle(vehicleType vehicleTypes.VehicleType, registrationNo string,
-	color commonTypes.Color) (string, error) {
+func (pl *ParkingLot) ParkVehicle(vehicleType types.VehicleType, registrationNo string,
+	color types.Color) (string, error) {
 	vehicle, err := pl.vehicleFactory.CreateVehicle(vehicleType, registrationNo, color)
 	if err != nil {
 		return "", err
@@ -78,7 +77,7 @@ func (pl *ParkingLot) Status() (string, error) {
 	return status, nil
 }
 
-func (pl *ParkingLot) FindVehiclesByColor(color commonTypes.Color) (string, error) {
+func (pl *ParkingLot) FindVehiclesByColor(color types.Color) (string, error) {
 	slots, err := pl.storageStrategy.GetAllSlots()
 	if err != nil {
 		return "", err

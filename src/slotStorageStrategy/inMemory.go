@@ -2,7 +2,7 @@ package slotStorageStrategy
 
 import (
 	"github.com/aryamansingh2008/ParkingLot/src/parkingSlot"
-	parkingSlotType "github.com/aryamansingh2008/ParkingLot/src/parkingSlot/parkingSlotType"
+	"github.com/aryamansingh2008/ParkingLot/src/parkingSlot/parkingSlotType"
 	"github.com/aryamansingh2008/ParkingLot/src/slotStorageStrategy/errors"
 )
 

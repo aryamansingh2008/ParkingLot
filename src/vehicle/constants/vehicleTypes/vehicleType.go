@@ -1,4 +1,4 @@
-package vehicletype
+package vehicleTypes
 
 import "github.com/aryamansingh2008/ParkingLot/src/vehicle/types"
 

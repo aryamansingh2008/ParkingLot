@@ -1,9 +1,8 @@
 package vehicle
 
 import (
-	colorConstants "github.com/aryamansingh2008/ParkingLot/src/common/constants/color"
-	"github.com/aryamansingh2008/ParkingLot/src/common/types"
 	"github.com/aryamansingh2008/ParkingLot/src/vehicle/errors"
+	"github.com/aryamansingh2008/ParkingLot/src/vehicle/types"
 )
 
 type BaseVehicle struct {
@@ -14,10 +13,6 @@ type BaseVehicle struct {
 func NewBaseVehicle(registrationNo string, color types.Color) (*BaseVehicle, error) {
 	if registrationNo == "" {
 		return nil, errors.InvalidRegistration
-	}
-
-	if color == colorConstants.None {
-		return nil, errors.InvalidColor
 	}
 
 	return &BaseVehicle{

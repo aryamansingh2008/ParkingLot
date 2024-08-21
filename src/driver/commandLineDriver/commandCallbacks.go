@@ -3,7 +3,6 @@ package commandLineDriver
 import (
 	"strconv"
 
-	commonTypes "github.com/aryamansingh2008/ParkingLot/src/common/types"
 	"github.com/aryamansingh2008/ParkingLot/src/driver/constants/commands"
 	"github.com/aryamansingh2008/ParkingLot/src/driver/errors"
 	"github.com/aryamansingh2008/ParkingLot/src/parkingLot"
@@ -70,7 +69,7 @@ func (d *CommandLineDriver) ParkCallback(args []string) (string, error) {
 	registrationNo := args[2]
 	color := args[3]
 
-	output, err := d.parkingLot.ParkVehicle(types.VehicleType(vehicleTypeStr), registrationNo, commonTypes.Color(color))
+	output, err := d.parkingLot.ParkVehicle(types.VehicleType(vehicleTypeStr), registrationNo, types.Color(color))
 	return output + "\n", err
 }
 
@@ -106,7 +105,7 @@ func (d *CommandLineDriver) FindVehiclesByColorCallback(args []string) (string, 
 	}
 
 	color := args[1]
-	return d.parkingLot.FindVehiclesByColor(commonTypes.Color(color))
+	return d.parkingLot.FindVehiclesByColor(types.Color(color))
 }
 
 func (d *CommandLineDriver) FindVehicleBySlotIDCallback(args []string) (string, error) {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/aryamansingh2008/ParkingLot/src/parkingSlot/errors"
-	parkingSlotType "github.com/aryamansingh2008/ParkingLot/src/parkingSlot/parkingSlotType"
+	"github.com/aryamansingh2008/ParkingLot/src/parkingSlot/parkingSlotType"
 	"github.com/aryamansingh2008/ParkingLot/src/vehicle"
 )
 
