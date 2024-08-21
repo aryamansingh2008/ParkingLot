@@ -50,7 +50,7 @@ func (d *CommandLineDriver) HandleCommand(input string) (string, error) {
 	if cb, exists := d.commandCallbacks[command]; exists {
 		return cb(args)
 	}
-	return "", errors.InvalidRequest
+	return "", errors.ErrInvalidRequest
 }
 
 func (d *CommandLineDriver) isValidCommand(args []string, minLength int) bool {
@@ -63,7 +63,7 @@ func (d *CommandLineDriver) isValidCommand(args []string, minLength int) bool {
 
 func (d *CommandLineDriver) getCommand(args []string) (string, error) {
 	if !d.isValidCommand(args, 1) {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	return args[0], nil

@@ -57,7 +57,7 @@ func (pl *ParkingLot) Vacate(slotID int) error {
 	}
 
 	if !slot.IsOccupied() {
-		return errors.VehicleNotFound
+		return errors.ErrVehicleNotFound
 	}
 
 	slot.Vacate()
@@ -104,7 +104,7 @@ func (pl *ParkingLot) FindVehicleByRegistrationNo(registrationNo string) (string
 		}
 	}
 
-	return "", errors.VehicleNotFound
+	return "", errors.ErrVehicleNotFound
 }
 
 func (pl *ParkingLot) FindVehicleBySlotID(slotID int) (string, error) {

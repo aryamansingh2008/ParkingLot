@@ -25,5 +25,5 @@ func (s *nearestFirstStrategy) AllocateSlot(storageStrategy slotStorageStrategy.
 			return slot, nil
 		}
 	}
-	return nil, errors.NoValidSlotFound
+	return nil, errors.ErrNoValidSlotFound
 }

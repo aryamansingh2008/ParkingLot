@@ -33,7 +33,7 @@ func (s *inMemoryStorage) GetSlot(slotID int) (*parkingSlot.ParkingSlot, error) 
 		}
 	}
 
-	return nil, errors.SlotIdNotFound
+	return nil, errors.ErrSlotIdNotFound
 }
 
 func (s *inMemoryStorage) UpdateSlot(updatedSlot *parkingSlot.ParkingSlot) error {
@@ -44,7 +44,7 @@ func (s *inMemoryStorage) UpdateSlot(updatedSlot *parkingSlot.ParkingSlot) error
 		}
 	}
 
-	return errors.SlotIdNotFound
+	return errors.ErrSlotIdNotFound
 }
 
 func (s *inMemoryStorage) GetAllSlots() ([]*parkingSlot.ParkingSlot, error) {

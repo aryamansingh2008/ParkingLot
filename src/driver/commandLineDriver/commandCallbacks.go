@@ -24,7 +24,7 @@ func (d *CommandLineDriver) registerCallbacks() {
 
 func (d *CommandLineDriver) CreateCallback(args []string) (string, error) {
 	if !d.isValidCommand(args, 2) {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	size, err := strconv.Atoi(args[1])
@@ -50,7 +50,7 @@ func (d *CommandLineDriver) CreateCallback(args []string) (string, error) {
 
 func (d *CommandLineDriver) StatusCallback(args []string) (string, error) {
 	if d.parkingLot == nil {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	return d.parkingLot.Status()
@@ -58,11 +58,11 @@ func (d *CommandLineDriver) StatusCallback(args []string) (string, error) {
 
 func (d *CommandLineDriver) ParkCallback(args []string) (string, error) {
 	if d.parkingLot == nil {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	if !d.isValidCommand(args, 4) {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	vehicleTypeStr := args[1]
@@ -75,11 +75,11 @@ func (d *CommandLineDriver) ParkCallback(args []string) (string, error) {
 
 func (d *CommandLineDriver) VacateBySlotIDCallback(args []string) (string, error) {
 	if d.parkingLot == nil {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	if !d.isValidCommand(args, 2) {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	slotID, err := strconv.Atoi(args[1])
@@ -97,11 +97,11 @@ func (d *CommandLineDriver) VacateBySlotIDCallback(args []string) (string, error
 
 func (d *CommandLineDriver) FindVehiclesByColorCallback(args []string) (string, error) {
 	if d.parkingLot == nil {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	if !d.isValidCommand(args, 2) {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	color := args[1]
@@ -110,11 +110,11 @@ func (d *CommandLineDriver) FindVehiclesByColorCallback(args []string) (string, 
 
 func (d *CommandLineDriver) FindVehicleBySlotIDCallback(args []string) (string, error) {
 	if d.parkingLot == nil {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	if !d.isValidCommand(args, 2) {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	slotID, err := strconv.Atoi(args[1])
@@ -126,11 +126,11 @@ func (d *CommandLineDriver) FindVehicleBySlotIDCallback(args []string) (string, 
 
 func (d *CommandLineDriver) FindVehicleByRegistrationNoCallback(args []string) (string, error) {
 	if d.parkingLot == nil {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	if !d.isValidCommand(args, 2) {
-		return "", errors.InvalidRequest
+		return "", errors.ErrInvalidRequest
 	}
 
 	registrationNo := args[1]

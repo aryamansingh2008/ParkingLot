@@ -19,6 +19,6 @@ func (f *vehicleFactory) CreateVehicle(vehicleType types.VehicleType, registrati
 	case vehicleTypes.Car:
 		return vehicle.NewCar(registrationNo, color)
 	default:
-		return nil, errors.InvalidType
+		return nil, errors.ErrInvalidType
 	}
 }

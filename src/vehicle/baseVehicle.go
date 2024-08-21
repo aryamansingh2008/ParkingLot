@@ -12,7 +12,7 @@ type BaseVehicle struct {
 
 func NewBaseVehicle(registrationNo string, color types.Color) (*BaseVehicle, error) {
 	if registrationNo == "" {
-		return nil, errors.InvalidRegistration
+		return nil, errors.ErrInvalidRegistration
 	}
 
 	return &BaseVehicle{

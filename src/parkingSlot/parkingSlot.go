@@ -16,7 +16,7 @@ type ParkingSlot struct {
 
 func NewParkingSlot(id int, slotType parkingSlotType.ParkingSlotType) (*ParkingSlot, error) {
 	if id < 1 {
-		return nil, errors.InvalidID
+		return nil, errors.ErrInvalidID
 	}
 
 	return &ParkingSlot{
@@ -51,7 +51,7 @@ func (ps *ParkingSlot) CanPark(vehicle vehicle.IVehicle) bool {
 
 func (ps *ParkingSlot) Park(vehicle vehicle.IVehicle) error {
 	if !ps.CanPark(vehicle) {
-		return errors.InvalidPark
+		return errors.ErrInvalidPark
 	}
 
 	ps.vehicle = vehicle
