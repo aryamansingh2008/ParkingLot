@@ -25,6 +25,10 @@ func NewParkingSlot(id int, slotType parkingslottype.ParkingSlotType) (*ParkingS
 	}, nil
 }
 
+func (ps *ParkingSlot) ID() int {
+	return ps.id
+}
+
 func (ps *ParkingSlot) IsOccupied() bool {
 	return ps.vehicle != nil
 }
