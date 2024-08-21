@@ -1,11 +1,12 @@
 package vehicle
 
 import (
-	"github.com/aryamansingh2008/ParkingLot/src/common/types"
+	commonTypes "github.com/aryamansingh2008/ParkingLot/src/common/types"
+	types "github.com/aryamansingh2008/ParkingLot/src/vehicle/types"
 )
 
-type Vehicle interface {
-	Type() VehicleType
+type IVehicle interface {
+	Type() types.VehicleType
 	RegistrationNo() string
-	Color() types.Color
+	Color() commonTypes.Color
 }
