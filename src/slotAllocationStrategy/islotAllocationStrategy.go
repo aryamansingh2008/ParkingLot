@@ -7,6 +7,6 @@ import (
 )
 
 type ISlotAllocationStrategy interface {
-	AllocateSlot(storageStrategy slotStorageStrategy.IParkingSlotStorageStrategy,
+	AllocateSlot(storageStrategy slotStorageStrategy.ISlotStorageStrategy,
 		vehicle vehicle.IVehicle) (*parkingSlot.ParkingSlot, error)
 }

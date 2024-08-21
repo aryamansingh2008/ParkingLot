@@ -6,45 +6,47 @@ import (
 	"github.com/aryamansingh2008/ParkingLot/src/slotStorageStrategy/errors"
 )
 
-type InMemoryStorage struct {
-	slots map[int]*parkingSlot.ParkingSlot
+type inMemoryStorage struct {
+	slots []*parkingSlot.ParkingSlot
 }
 
-func NewInMemoryStorage(size int) (*InMemoryStorage, error) {
-	slots := make(map[int]*parkingSlot.ParkingSlot, size)
+func NewInMemoryStorage(size int) (*inMemoryStorage, error) {
+	slots := make([]*parkingSlot.ParkingSlot, 0, size)
 	for slotID := 1; slotID <= size; slotID++ {
 		slot, err := parkingSlot.NewParkingSlot(slotID, parkingSlotType.LargeSlot{})
 		if err != nil {
 			return nil, err
 		}
 
-		slots[slotID] = slot
+		slots = append(slots, slot)
 	}
 
-	return &InMemoryStorage{
+	return &inMemoryStorage{
 		slots: slots,
 	}, nil
 }
 
-func (s *InMemoryStorage) GetSlot(slotID int) (*parkingSlot.ParkingSlot, error) {
-	slot, exists := s.slots[slotID]
-	if !exists {
-		return nil, errors.SlotIdNotFound
-	}
-
-	return slot, nil
-}
-
-func (s *InMemoryStorage) UpdateSlot(slot *parkingSlot.ParkingSlot) error {
-	s.slots[slot.ID()] = slot
-	return nil
-}
-
-func (s *InMemoryStorage) GetAllSlots() ([]*parkingSlot.ParkingSlot, error) {
-	allSlots := make([]*parkingSlot.ParkingSlot, 0, len(s.slots))
+func (s *inMemoryStorage) GetSlot(slotID int) (*parkingSlot.ParkingSlot, error) {
 	for _, slot := range s.slots {
-		allSlots = append(allSlots, slot)
+		if slot.ID() == slotID {
+			return slot, nil
+		}
 	}
 
-	return allSlots, nil
+	return nil, errors.SlotIdNotFound
+}
+
+func (s *inMemoryStorage) UpdateSlot(updatedSlot *parkingSlot.ParkingSlot) error {
+	for _, slot := range s.slots {
+		if slot.ID() == updatedSlot.ID() {
+			slot = updatedSlot
+			return nil
+		}
+	}
+
+	return errors.SlotIdNotFound
+}
+
+func (s *inMemoryStorage) GetAllSlots() ([]*parkingSlot.ParkingSlot, error) {
+	return s.slots, nil
 }

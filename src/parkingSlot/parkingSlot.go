@@ -64,7 +64,7 @@ func (ps *ParkingSlot) Vacate() {
 
 func (ps *ParkingSlot) Status() string {
 	if ps.IsOccupied() {
-		return fmt.Sprintf("Slot %d: Vehicle %s is parked\n", ps.id, ps.vehicle.RegistrationNo())
+		return fmt.Sprintf("Slot %d: Vehicle %s Colored %s is parked\n", ps.id, ps.vehicle.RegistrationNo(), ps.vehicle.Color())
 	}
 
 	return fmt.Sprintf("Slot %d: Empty\n", ps.id)

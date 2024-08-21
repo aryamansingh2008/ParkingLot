@@ -1,6 +1,8 @@
-package parkinglot
+package parkingLot
 
 import (
+	"strconv"
+
 	commonTypes "github.com/aryamansingh2008/ParkingLot/src/common/types"
 	"github.com/aryamansingh2008/ParkingLot/src/parkingLot/errors"
 	"github.com/aryamansingh2008/ParkingLot/src/slotAllocationStrategy"
@@ -10,31 +12,43 @@ import (
 )
 
 type ParkingLot struct {
-	storageStrategy    slotStorageStrategy.IParkingSlotStorageStrategy
+	storageStrategy    slotStorageStrategy.ISlotStorageStrategy
 	allocationStrategy slotAllocationStrategy.ISlotAllocationStrategy
-	vehicleFactory     factory.VehicleFactory
+	vehicleFactory     factory.IVehicleFactory
 }
 
-func (pl *ParkingLot) ParkVehicle(vehicleType vehicleTypes.VehicleType, registrationNo string, color commonTypes.Color) (int, error) {
+func NewParkingLot(storageStrategy slotStorageStrategy.ISlotStorageStrategy,
+	allocationStrategy slotAllocationStrategy.ISlotAllocationStrategy,
+	vehicleFactory factory.IVehicleFactory) (*ParkingLot, error) {
+
+	return &ParkingLot{
+		storageStrategy:    storageStrategy,
+		allocationStrategy: allocationStrategy,
+		vehicleFactory:     vehicleFactory,
+	}, nil
+}
+
+func (pl *ParkingLot) ParkVehicle(vehicleType vehicleTypes.VehicleType, registrationNo string,
+	color commonTypes.Color) (string, error) {
 	vehicle, err := pl.vehicleFactory.CreateVehicle(vehicleType, registrationNo, color)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 
 	slot, err := pl.allocationStrategy.AllocateSlot(pl.storageStrategy, vehicle)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 
 	if err := slot.Park(vehicle); err != nil {
-		return 0, err
+		return "", err
 	}
 
 	if err := pl.storageStrategy.UpdateSlot(slot); err != nil {
-		return 0, err
+		return "", err
 	}
 
-	return slot.ID(), nil
+	return strconv.Itoa(slot.ID()), nil
 }
 
 func (pl *ParkingLot) Vacate(slotID int) error {
@@ -59,7 +73,7 @@ func (pl *ParkingLot) Status() (string, error) {
 
 	status := ""
 	for _, slot := range slots {
-		status += slot.Status() + "\n"
+		status += slot.Status()
 	}
 	return status, nil
 }

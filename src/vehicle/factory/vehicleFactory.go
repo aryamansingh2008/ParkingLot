@@ -10,6 +10,10 @@ import (
 
 type VehicleFactory struct{}
 
+func NewVehicleFactory() *VehicleFactory {
+	return &VehicleFactory{}
+}
+
 func (f *VehicleFactory) CreateVehicle(vehicleType types.VehicleType, registrationNo string,
 	color commonTypes.Color) (vehicle.IVehicle, error) {
 	switch vehicleType {

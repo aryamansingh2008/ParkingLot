@@ -7,13 +7,13 @@ import (
 	"github.com/aryamansingh2008/ParkingLot/src/vehicle"
 )
 
-type NearestFirstStrategy struct{}
+type nearestFirstStrategy struct{}
 
-func NewNearestFirstStrategy() *NearestFirstStrategy {
-	return &NearestFirstStrategy{}
+func NewNearestFirstStrategy() *nearestFirstStrategy {
+	return &nearestFirstStrategy{}
 }
 
-func (s *NearestFirstStrategy) AllocateSlot(storageStrategy slotStorageStrategy.IParkingSlotStorageStrategy,
+func (s *nearestFirstStrategy) AllocateSlot(storageStrategy slotStorageStrategy.ISlotStorageStrategy,
 	vehicle vehicle.IVehicle) (*parkingSlot.ParkingSlot, error) {
 	slots, err := storageStrategy.GetAllSlots()
 	if err != nil {
