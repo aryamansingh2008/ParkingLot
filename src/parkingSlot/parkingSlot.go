@@ -1,20 +1,20 @@
-package parkingslot
+package parkingSlot
 
 import (
 	"fmt"
 
 	"github.com/aryamansingh2008/ParkingLot/src/parkingSlot/errors"
-	parkingslottype "github.com/aryamansingh2008/ParkingLot/src/parkingSlot/parkingSlotType"
+	parkingSlotType "github.com/aryamansingh2008/ParkingLot/src/parkingSlot/parkingSlotType"
 	"github.com/aryamansingh2008/ParkingLot/src/vehicle"
 )
 
 type ParkingSlot struct {
 	id       int
-	slotType parkingslottype.ParkingSlotType
+	slotType parkingSlotType.ParkingSlotType
 	vehicle  vehicle.IVehicle
 }
 
-func NewParkingSlot(id int, slotType parkingslottype.ParkingSlotType) (*ParkingSlot, error) {
+func NewParkingSlot(id int, slotType parkingSlotType.ParkingSlotType) (*ParkingSlot, error) {
 	if id < 1 {
 		return nil, errors.InvalidID
 	}
@@ -33,13 +33,21 @@ func (ps *ParkingSlot) IsOccupied() bool {
 	return ps.vehicle != nil
 }
 
-func (ps *ParkingSlot) Park(vehicle vehicle.IVehicle) error {
+func (ps *ParkingSlot) CanPark(vehicle vehicle.IVehicle) bool {
 	if ps.IsOccupied() {
-		return errors.InvalidParkOccupied
+		return false
 	}
 
 	if !ps.slotType.CanAccommodate(vehicle.Type()) {
-		return errors.InvalidParkCantAccomodate
+		return false
+	}
+
+	return true
+}
+
+func (ps *ParkingSlot) Park(vehicle vehicle.IVehicle) error {
+	if !ps.CanPark(vehicle) {
+		return errors.InvalidPark
 	}
 
 	ps.vehicle = vehicle
